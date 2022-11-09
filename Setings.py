@@ -3,10 +3,10 @@ serverName =  "localhost"
 this_serverPort = 27001
 
 hostName2 = "localhost"
-serverPort = 27002
+serverPort2 = 27002
 
 hostName3 = "localhost"
-serverPort = 27003
+serverPort3 = 27003
 
 server_nr = 1
 UDP_Serv = '127.0.0.1'
