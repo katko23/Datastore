@@ -37,3 +37,9 @@ def DataDelete(clientData):
             data.remove(d)
             return 0
     return 1
+
+def foundId(id):
+    for d in data:
+        if d['id'] == id:
+            return True
+    return False
