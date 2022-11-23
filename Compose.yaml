@@ -1,0 +1,33 @@
+services:
+  datastore1-c:
+    image: datastore1
+    container_name: datastore1-c
+    hostname: datastore-c
+    ports:
+      - "27001:27001"
+      - "32000:32000"
+    networks:
+      - default
+
+  datastore2-c:
+    image: datastore2
+    container_name: datastore2-c
+    hostname: datastore2-c
+    ports:
+      - "27002:27002"
+    networks:
+      - default
+
+  datastore3-c:
+    image: datastore3
+    container_name: datastore3-c
+    hostname: datastore3-c
+    ports:
+      - "27003:27003"
+    networks:
+      - default
+
+networks:
+  default:
+    name: PR
+    external: true
