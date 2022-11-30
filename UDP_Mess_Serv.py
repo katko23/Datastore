@@ -1,7 +1,8 @@
 import socket
 import sys
 import time
-
+import asyncio
+import websockets
 import Setings
 import pickle
 from Data_Buffer import foundId
@@ -82,8 +83,25 @@ def TCP_sender(action, id, HOST, PORT):
             s.sendall(pickle.dumps(dictToSend))
             data = s.recv(1024)
         print(f"Received {data!r}")
-        res = str(data,'utf-8')
+        res = str(data, 'utf-8')
         if res == 'Error':
             return False
         else:
             return True
+
+
+async def webSocketecho(websocket):
+    async for message in websocket:
+        await websocket.send(message)
+        print(message)
+
+async def WebSocket_Receiver():
+    async with websockets.serve(webSocketecho, port=Setings.WebSocket_port1):
+        await asyncio.Future()  # run forever
+
+async def WebSocket_Sender(ws_host, ws_port, mess):
+    async with websockets.connect("ws://" + str(ws_host) + ":" + str(ws_port)) as websocket:
+        await websocket.send(mess)
+        await websocket.recv()
+
+

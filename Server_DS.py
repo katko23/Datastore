@@ -2,6 +2,9 @@ from threading import Thread
 import threading
 import requests
 from flask import Flask, request,  jsonify
+from flask_sock import Sock
+
+import Data_Buffer
 import Reqs
 import Setings
 import UDP_Mess_Serv
@@ -19,6 +22,7 @@ class Server(Thread):
 
     def run(self):
         app = Flask(__name__)
+        sock = Sock(app)
         cl_add = Switch.CounterS(1,2,3)
 
         @app.route('/DS', methods=['GET'])
@@ -266,4 +270,12 @@ class Server(Thread):
             serverLock.release()
             return jsonify(dictToReturn)
 
-        app.run(host=hostName, port=serverPort, debug=False)
+        @sock.route('/internal/websocket')
+        def echo(sock):
+            while True:
+                data = sock.receive()
+                print(data)
+                response = Data_Buffer.data_time[data]
+                sock.send(response)
+
+        app.run(host=hostName, port=serverPort, debug=False,  use_reloader=False)
