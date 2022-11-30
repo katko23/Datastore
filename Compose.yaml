@@ -6,6 +6,8 @@ services:
     ports:
       - "27001:27001"
       - "32000:32000"
+      - "27005:27005"
+      - "27006:27006"
     networks:
       - default
 
@@ -15,6 +17,8 @@ services:
     hostname: datastore2-c
     ports:
       - "27002:27002"
+      - "27007:27007"
+      - "27008:27008"
     networks:
       - default
 
@@ -24,6 +28,8 @@ services:
     hostname: datastore3-c
     ports:
       - "27003:27003"
+      - "27009:27009"
+      - "27010:27010"
     networks:
       - default
 

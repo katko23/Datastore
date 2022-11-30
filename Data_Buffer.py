@@ -1,9 +1,11 @@
 
+from datetime import datetime
+
 data_creation = []
 data_update = []
 data_delete = []
 data_received = []
-
+data_time = []
 data = []
 def DataCreation(clientData):
     if clientData['id'] == 666:
@@ -12,14 +14,18 @@ def DataCreation(clientData):
         if d['id'] == clientData['id']:
             return 1
     data.append(clientData)
+    data_time.append(datetime.now())
     return 0
 
 
 def DataUpdate(clientData):
+    counter = 0
     for d in data:
         if d['id'] == clientData['id']:
             d['data'] = clientData['data']
+            data_time[counter] = datetime.now()
             return 0
+    counter += 1
     return 1
 
 def DataRead(clientData):

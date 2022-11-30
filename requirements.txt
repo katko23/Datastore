@@ -1,2 +1,5 @@
 flask
 requests
+websockets
+flask_sock
+Switch
